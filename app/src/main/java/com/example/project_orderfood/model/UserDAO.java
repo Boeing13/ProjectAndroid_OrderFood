@@ -4,6 +4,7 @@ import com.example.project_orderfood.connectDB.DBContext;
 import com.example.project_orderfood.entity.User;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,14 +15,88 @@ import java.util.Map;
 
 public class UserDAO {
 
+    DBContext db;
     Connection connection;
     String connectResult = "";
     boolean isSuccess = false;
 
+    //INSERT
+    public void insertUser(User user){
+        db = new DBContext();
+        connection = db.connection();
+        String query = "insert into Users (phone, username, password, isStaff) " +
+                "values (?,?,?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, user.getPhone());
+            ps.setString(2, user.getUsername());
+            ps.setString(3, user.getPassword());
+            ps.setBoolean(4, user.isStaff());
+            ps.executeUpdate();
+            System.out.println("ADDED");
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //CHECK DUPLICATE PHONE NUMBER
+    public boolean isExistedPhone(String phone){
+        db = new DBContext();
+        connection = db.connection();
+        String query = "select count(userID) as count from [Users] where phone=?";
+        int count = 0;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                count = rs.getInt(1);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(count > 0) {
+            System.out.println("EXISTED");
+            return true;
+        }
+        else {
+            System.out.println("NOT EXIST");
+            return false;
+        }
+    }
+
+    //GET USER BY PHONE
+    public User getUser(String phone){
+        db = new DBContext();
+        User user = new User();
+        connection = db.connection();
+        String query = "select * from [Users] where phone=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                String password = rs.getString("password");
+                String name = rs.getString("username");
+                boolean isStaff = false;
+                user = new User(phone, name, password, isStaff);
+//                System.out.println("PASSWORD: " + password);
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
     public List<User> getData() {
         List<User> data = new ArrayList<>();
 
-            DBContext db = new DBContext();
+            db = new DBContext();
             connection = db.connection();
         try{
             if(connection == null){
@@ -37,7 +112,10 @@ public class UserDAO {
                     String phone =  rs.getString("phone");
                     String account  =  rs.getString("username");
                     String password = rs.getString("password");
-                    data.add(new User(phone, account, password));
+                    String staff = rs.getString("isStaff");
+                    boolean isStaff = false;
+                    if(staff.equals("True")) isStaff = true;
+                    data.add(new User(phone, account, password, isStaff));
                 }
                 connectResult = "CONNECT SUCCESSFULLY";
                 isSuccess = true;
@@ -53,82 +131,5 @@ public class UserDAO {
         return data;
     }
 
-    //ĐÂY LÀ PHẦN CODE SẮN CHO AI THÍCH DÙNG THÌ DÙNG, KHÔNG THÌ CÓ THỂ XÓA ĐI NHA ^^
 
- //    private JDBCController jdbcController = new JDBCController();
-//    private Connection connection;
-//
-//    public UserDAO() {
-//        connection = jdbcController.ConnnectionData(); // Tạo kết nối tới database
-//    }
-//
-//    public String getPasswordByPhone(String phone)throws SQLException{
-//        String password = "";
-//        try {
-//            Statement statement = connection.createStatement();
-//
-//            String query = "select u.password from Users u where u.phone = '"+ phone +"'";
-//            ResultSet rs = statement.executeQuery(query);
-//            while(rs.next()){
-//                password = rs.getString("password");
-//                connection.close();
-//                System.out.println("password: " + password);
-//
-//            }
-//            connection.close();
-//            return null;
-//        }catch (Exception e){
-//            System.out.println("CONNECTION " + connection);
-//        }
-//        return password;
-//    }
-//
-//    public List<User> getuserlist() throws SQLException {
-//        List<User> list = new ArrayList<>();
-//        Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-//        String sql = "select * from User";
-//        // Thực thi câu lệnh SQL trả về đối tượng ResultSet. // Mọi kết quả trả về sẽ được lưu trong ResultSet
-//        ResultSet rs = statement.executeQuery(sql);
-//        while (rs.next()) {
-//          //  list.add(new User(rs.getString("Name"), rs.getInt("ID")));// Đọc dữ liệu từ ResultSet
-//        }
-//        connection.close();// Đóng kết nối
-//        return list;
-//    }
-//
-//    public boolean Insert(User objUser) throws SQLException {
-//        Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-//        String sql = "insert in to User(Name) values(" + objUser.getPhone() + ")";
-//        if (statement.executeUpdate(sql) > 0) { // Dùng lệnh executeUpdate cho các lệnh CRUD
-//            connection.close();
-//            return true;
-//        } else {
-//            connection.close();
-//            return false;
-//        }
-//    }
-//
-//    public boolean Update(User objUser) throws SQLException {
-//        Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-//        String sql = "Update User set Name = " + objUser.getUsername() + " where ID = " + objUser.getUserId();
-//        if (statement.executeUpdate(sql) > 0) {
-//            connection.close();
-//            return true;
-//        } else
-//            connection.close();
-//        return false;
-//    }
-//
-//    public boolean Delete(User objUser) throws SQLException {
-//        Statement statement = connection.createStatement();// Tạo đối tượng Statement.
-//        String sql = "delete from User where ID = " + objUser.getUserId();
-//        if (statement.executeUpdate(sql) > 0){
-//            connection.close();
-//            return true;
-//        }
-//
-//        else
-//            connection.close();
-//        return false;
-//    }
 }
