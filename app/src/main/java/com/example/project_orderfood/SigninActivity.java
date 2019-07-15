@@ -28,21 +28,36 @@ public class SigninActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< Updated upstream
         setContentView(R.layout.activity_signin);
         etPhone = findViewById(R.id.etPhone);
         etPassword = findViewById(R.id.etPassword);
         dao = new UserDAO();
+=======
+//        setContentView(R.layout.activity_signin);
+//        btnSignin = findViewById(R.id.btnSignin);
+//        etPhone = findViewById(R.id.etPhone);
+//        etPassword = findViewById(R.id.etPassword);
+>>>>>>> Stashed changes
 
     }
 
     //VALIDATE AND SIGNIN
     public void signIn(View view) throws SQLException {
+<<<<<<< Updated upstream
         final ProgressDialog mDialog = new ProgressDialog(SigninActivity.this);
         mDialog.setMessage("Please waiting");
         mDialog.show();
         new CountDownTimer(1000, 1000) {
             public void onTick(long millisUntilFinished) {
             }
+=======
+//        ProgressDialog mDialog = new ProgressDialog(SigninActivity.this);
+//        mDialog.setMessage("Please waiting");
+//        mDialog.show();
+//        String phone = etPhone.getText().toString();
+//        String password = etPassword.getText().toString();
+>>>>>>> Stashed changes
 
             public void onFinish() {
                 mDialog.dismiss();

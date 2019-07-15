@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Project_OrderFood </string>
     <string name="tvSlogan"> I am not a chef. But I am passionate about food - the tradition of it, cooking it, and sharing it </string>
+<<<<<<< Updated upstream
     <string name="title_activity_home">Home</string>
+=======
+    <string name="title_activity_user__detail_food2">User_DetailFood2</string>
+>>>>>>> Stashed changes
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -15,6 +19,7 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+<<<<<<< Updated upstream
 
     <string name="hint_phone">Phone number</string>
     <string name="hint_password">Password</string>
@@ -29,4 +34,8 @@
 
     <string name="noti_signin">Sign in successfully!</string>
     <string name="noti_signup">Sign up successfully!</string>
+=======
+    <string name="title_activity_user__view_detail_food">User_ViewDetailFood</string>
+    <string name="title_activity_user__list_cate_food">User_ListCateFood</string>
+>>>>>>> Stashed changes
 </resources>
