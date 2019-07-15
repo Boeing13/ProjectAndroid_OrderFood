@@ -4,4 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignupActivity"/>
+    android:background="@drawable/bg3"
+    tools:context=".SignupActivity">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="346dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="36dp"
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:hint="@string/hint_name"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_name"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="346dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="36dp"
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:hint="@string/hint_phone"
+            android:inputType="phone"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_phone"
+        app:passwordToggleEnabled="true"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="347dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="35dp"
+            android:ems="10"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etPhone"
+            tools:visibility="visible" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="375dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="18dp"
+        android:background="#8BC34A"
+        android:onClick="signup"
+        android:text="Sign up"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_password" />
+
+
+</android.support.constraint.ConstraintLayout>
