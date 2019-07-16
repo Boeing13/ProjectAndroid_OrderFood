@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.widget.TextView;
 
 import com.example.project_orderfood.Common.Common;
+import com.example.project_orderfood.UserAdapter.MyCategoryAdapter;
 import com.example.project_orderfood.entity.Category;
 import com.example.project_orderfood.model.CategoryDAO;
 
@@ -71,7 +72,7 @@ public class Home extends AppCompatActivity
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
-
+       // recycler_menu.setOnc
     }
 
     private void loadMenu() {
@@ -131,4 +132,5 @@ public class Home extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

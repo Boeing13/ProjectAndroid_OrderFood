@@ -41,4 +41,8 @@ public class CategoryDAO {
         }
         return categoryList;
     }
+
+    public void getByID(int cid){
+
+    }
 }

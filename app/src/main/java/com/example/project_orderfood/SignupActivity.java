@@ -63,6 +63,7 @@ public class SignupActivity extends AppCompatActivity {
                 } else if(dao.isExistedPhone(phone)){
                     Toast.makeText(getApplicationContext(), getString(R.string.err_msg_phone_existed), Toast.LENGTH_LONG).show();
                     requestFocus(etPhone);
+                    User user = new User(phone, name, password, false);
                 } else if(password.isEmpty()){
                     Toast.makeText(getApplicationContext(), getString(R.string.err_msg_empty), Toast.LENGTH_LONG).show();
                     requestFocus(etPassword);
@@ -83,5 +84,6 @@ public class SignupActivity extends AppCompatActivity {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
+
 
 }

@@ -64,8 +64,8 @@ public class User_ListFood extends AppCompatActivity
         FoodDAO foodDAO = new FoodDAO();
 
         //Example ưw
-        cateID = 1;
-        //cateID= getIntent().getIntExtra("cateID",0);
+       // cateID = 1;
+        cateID= getIntent().getIntExtra("cateID",0);
         allFoods = foodDAO.getAllFoodsByID(cateID);
         Adapter_U_ListFood adapter = new Adapter_U_ListFood(allFoods, this);
         listView.setAdapter(adapter);
@@ -74,6 +74,7 @@ public class User_ListFood extends AppCompatActivity
           @Override
           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
               int foodID = allFoods.get(position).foodID;
+              System.out.println("===============================");
               Intent intent = new Intent(User_ListFood.this, User_ViewDetailFood.class);
               intent.putExtra("foodID", foodID);
               startActivity(intent);

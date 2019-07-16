@@ -7,15 +7,17 @@ public class User implements Serializable {
     private String phone;
     private String username;
     private String password;
+    private boolean isStaff;
 
     public User(){
 
     }
 
-    public User(String phone, String username, String password) {
+    public User(String phone, String username, String password, boolean isStaff) {
         this.phone = phone;
         this.username = username;
         this.password = password;
+        this.isStaff=isStaff;
     }
 
     public User(int userId, String phone, String username, String password) {
@@ -24,6 +26,8 @@ public class User implements Serializable {
         this.username = username;
         this.password = password;
     }
+
+
 
     public int getUserId() {
         return userId;
@@ -55,6 +59,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isStaff() {
+        return isStaff;
+    }
+
+    public void setStaff(boolean staff) {
+        isStaff = staff;
     }
 
     @Override

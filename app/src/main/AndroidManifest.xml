@@ -16,11 +16,6 @@
             android:name=".User_ListFood"
             android:label="@string/title_activity_user__list_cate_food"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -30,16 +25,24 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+        <activity
+            android:name=".Home"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".User_DetailFood">
+
+        </activity>
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".SigninActivity" >
+
+        </activity>
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".SigninActivity" />
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
