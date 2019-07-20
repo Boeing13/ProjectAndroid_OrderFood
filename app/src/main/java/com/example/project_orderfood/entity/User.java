@@ -17,14 +17,17 @@ public class User implements Serializable {
         this.phone = phone;
         this.username = username;
         this.password = password;
+
         this.isStaff=isStaff;
+
     }
 
-    public User(int userId, String phone, String username, String password) {
+    public User(int userId, String phone, String username, String password, boolean isStaff) {
         this.userId = userId;
         this.phone = phone;
         this.username = username;
         this.password = password;
+        this.isStaff = isStaff;
     }
 
 
