@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+   >
 
     <include
         layout="@layout/app_bar_user__list_cate_food"
@@ -19,7 +20,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_user__list_cate_food"
-        app:menu="@menu/activity_user__list_cate_food_drawer" />
+        android:background="@color/overlayBackground"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/activity_home_drawer"
+        app:itemTextColor="@android:color/white"
+        app:itemIconTint="@android:color/white"/>
 
 </android.support.v4.widget.DrawerLayout>

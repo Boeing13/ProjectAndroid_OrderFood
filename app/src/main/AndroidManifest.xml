@@ -11,32 +11,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderCart"></activity>
+        <activity
+            android:name=".ViewDetailOrder"
+            android:label="@string/title_activity_view_detail_order"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".User_OrderHistory"
+            android:label="@string/title_activity_user__order_history"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".User_OrderCart"
+            android:label="@string/title_activity_user__order_cart"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".User_ListFood"
             android:label="@string/title_activity_user__list_cate_food"
-            android:theme="@style/AppTheme.NoActionBar" >
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".User_ViewDetailFood"
             android:label="@string/title_activity_user__view_detail_food"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".User_DetailFood">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignupActivity" />
-        <activity android:name=".SigninActivity" >
-
-        </activity>
-        <activity android:name=".MainActivity" >
+        <activity android:name=".SigninActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -20,7 +20,10 @@ import com.example.project_orderfood.entity.Food;
 import com.example.project_orderfood.entity.OrderDetail;
 import com.example.project_orderfood.entity.User;
 import com.example.project_orderfood.model.UserDAO;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -73,8 +76,12 @@ public class SigninActivity extends AppCompatActivity {
                         Common.currentUser = user;
                         SharedPreferences.Editor editor=getApplicationContext().getSharedPreferences("MyPre",MODE_PRIVATE).edit();
                         editor.putInt("userID",user.getUserId());
+                        Gson gson=new Gson();
+                        String json = gson.toJson(orderDetails);
+                        editor.putString("orderDetails",json);
+                        editor.apply();
                         startActivity(intent);
-                        finish();
+
                     }
 
                 }
@@ -82,9 +89,25 @@ public class SigninActivity extends AppCompatActivity {
         }.start();
     }
 
+    public void loadData(){
+        SharedPreferences.Editor editor=getApplicationContext().getSharedPreferences("MyPre",MODE_PRIVATE).edit();
+        Gson gson=new Gson();
+        String json = gson.toJson(orderDetails);
+        editor.putString("orderDetails",json);
+        editor.apply();
+    }
+
+    public void getData(){
+        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("MyPre",MODE_PRIVATE);
+        Gson gson=new Gson();
+       String json= sharedPreferences.getString("orderDetails",null);
+        Type type =new TypeToken<ArrayList<OrderDetail>>(){}.getType();
+        ArrayList<OrderDetail> orderDetails=gson.fromJson(json,type);
+    }
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
         }
     }
 

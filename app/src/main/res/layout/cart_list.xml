@@ -3,41 +3,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="30px"
+    >
 
-    <TextView
-        android:id="@+id/txtFName"
-        android:layout_width="158dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="31dp"
-        android:text="TextView"
-        android:textColor="#767576"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="7dp"
-        android:text="TextView"
-        android:textColor="#681B1919"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFName" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="333dp"
+            android:layout_height="74dp"
+            android:background="#FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txtNumberProduct"
-        android:layout_width="33dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="34dp"
-        android:background="@drawable/bankground_round_text"
-        android:gravity="center"
-        android:text="1"
-        android:textColor="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/txtFName"
-        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/txtFName"
+                    android:layout_width="152dp"
+                    android:layout_height="23dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="TextView"
+                    android:textColor="#767576"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="TextView"
+                    android:textColor="#681B1919"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtFName" />
+
+                <TextView
+                    android:id="@+id/txtNumberProduct"
+                    android:layout_width="39dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="72dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bankground_round_text"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintStart_toEndOf="@+id/txtFName"
+                    app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

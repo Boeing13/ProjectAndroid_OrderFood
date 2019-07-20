@@ -13,9 +13,9 @@ public class DBContext {
     private static final String LOG = "DEBUG";
 
     //ip mạng phòng (mạng hiện tại mình đang dùng, mỗi người sẽ có 1 ip khác nhau nên thay đổi khi chạy trên máy của mỗi người)
-   // private static String ip = "192.168.100.24";
-   // private static String ip = "10.22.174.211";
-    private static String ip = "192.168.1.90";
+      private static String ip = "192.168.100.24";//Home
+  //  private static String ip = "10.22.174.211";//Class
+  // private static String ip = "192.168.1.90";//Dorm
     private static String port = "1433";
     private static String classs = "net.sourceforge.jtds.jdbc.Driver";
     private static String db = "YummyDB";

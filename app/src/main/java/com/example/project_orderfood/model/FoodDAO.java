@@ -101,4 +101,20 @@ public class FoodDAO {
          return null;
      }
 
+     public int deletFood(int foodID){
+        String sql="delete from Food where foodID = ?";
+         DBContext dbContext=new DBContext();
+         Connection connection = dbContext.connection();
+         PreparedStatement preparedStatement = null;
+         try {
+             preparedStatement = connection.prepareStatement(sql);
+             preparedStatement.setInt(1,foodID);
+             int i = preparedStatement.executeUpdate();
+             return i;
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         return -1;
+     }
+
 }

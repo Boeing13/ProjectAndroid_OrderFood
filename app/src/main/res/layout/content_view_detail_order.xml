@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#35726C"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ViewDetailOrder"
+    tools:showIn="@layout/app_bar_view_detail_order">
+
+    <ListView
+        android:id="@+id/listViewOrder"
+        android:layout_width="337dp"
+        android:layout_height="451dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:divider="#35726C"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTotal"
+        android:layout_width="350dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="37dp"
+        android:text="TextView"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listViewOrder" />
+</android.support.constraint.ConstraintLayout>

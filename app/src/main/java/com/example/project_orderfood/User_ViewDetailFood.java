@@ -1,5 +1,7 @@
 package com.example.project_orderfood;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,17 +16,25 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.project_orderfood.Common.Common;
 import com.example.project_orderfood.entity.Food;
+import com.example.project_orderfood.entity.OrderDetail;
 import com.example.project_orderfood.model.FoodDAO;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class User_ViewDetailFood extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
    ImageView img;
-   TextView txtFoodTittle,txtFoodName,txtPrice,txtNumber,txtDes;
+   TextView txtFoodTittle,txtFoodName,txtPrice,txtNumber,txtDes,txtFullName;
    ImageButton btnImage;
-
+    int foodID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +57,8 @@ public class User_ViewDetailFood extends AppCompatActivity
         txtDes=findViewById(R.id.txtDescribe);
         btnImage=findViewById(R.id.btnBuy);
 
-        int foodID= getIntent().getIntExtra("foodID",-1);
-        Food food = new FoodDAO().getFood(foodID);
+         foodID= getIntent().getIntExtra("foodID",-1);
+        final Food food = new FoodDAO().getFood(foodID);
         String url=food.img;
         Picasso.with(this).load(url).into(img);
         txtFoodTittle.setText(food.name);
@@ -58,10 +68,54 @@ public class User_ViewDetailFood extends AppCompatActivity
         btnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ArrayList<OrderDetail> odList = getData();
+               String textNumber= txtNumber.getText().toString();
+               if(textNumber.equals("")){
+                   Toast.makeText(User_ViewDetailFood.this,"Please select number of foods > 0",Toast.LENGTH_LONG).show();
+               }else{
+                   int number=Integer.parseInt(textNumber);
+                   int check=checkExitedAndReturnPosition(odList,foodID);
+                   if(check==-1){
+                       odList.add(new OrderDetail(foodID,number,food.price));
+                   }else {
+                       odList.get(check).quantity+=number;
+                   }
+                   loadData(odList);
+                   Toast.makeText(User_ViewDetailFood.this,"Done !",Toast.LENGTH_LONG).show();
+               }
             }
         });
-        System.out.println(foodID);
+
+        //Set name for user
+        View headerView = navigationView.getHeaderView(0);
+        txtFullName = headerView.findViewById(R.id.txtFullName);
+        txtFullName.setText(Common.currentUser.getUsername());
+    }
+
+    public int  checkExitedAndReturnPosition(ArrayList<OrderDetail> orderDetails,int foodID){
+        for(int i=0;i<orderDetails.size();i++){
+            if(orderDetails.get(i).foodID==foodID){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public  ArrayList<OrderDetail> getData(){
+        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("MyPre",MODE_PRIVATE);
+        Gson gson=new Gson();
+        String json= sharedPreferences.getString("orderDetails",null);
+        Type type =new TypeToken<ArrayList<OrderDetail>>(){}.getType();
+        ArrayList<OrderDetail> orderDetails=gson.fromJson(json,type);
+        return  orderDetails;
+    }
+
+    public void loadData(ArrayList<OrderDetail> orderDetails){
+        SharedPreferences.Editor editor=getApplicationContext().getSharedPreferences("MyPre",MODE_PRIVATE).edit();
+        Gson gson=new Gson();
+        String json = gson.toJson(orderDetails);
+        editor.putString("orderDetails",json);
+        editor.apply();
     }
 
     @Override
@@ -89,9 +143,7 @@ public class User_ViewDetailFood extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.btnSelect) {
-            return true;
-        }
+       
 
         return super.onOptionsItemSelected(item);
     }
@@ -102,18 +154,25 @@ public class User_ViewDetailFood extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_cart) {
+            Intent intent=new Intent(this,User_OrderCart.class);
+            startActivity(intent);
+            this.finish();
+        } else if (id == R.id.nav_orders) {
+            Intent intent=new Intent(this,User_OrderHistory.class);
+            startActivity(intent);
+            this.finish();
+        } else if (id == R.id.nav_sign_out) {
+            SharedPreferences preferences = getSharedPreferences("Mypref", 0);
+            preferences.edit().remove("userID").commit();
+            preferences.edit().remove("orderDetails").commit();
+            Intent intent=new Intent(this,SigninActivity.class);
+            startActivity(intent);
+            this.finish();
+        }else if(id==R.id.nav_menu){
+            Intent intent=new Intent(this,Home.class);
+            startActivity(intent);
+            this.finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

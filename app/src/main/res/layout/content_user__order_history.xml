@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/txtNoti"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#35726C"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".User_OrderHistory"
+    tools:showIn="@layout/app_bar_user__order_history">
+
+    <ListView
+        android:id="@+id/lvOrderHis"
+        android:layout_width="341dp"
+        android:layout_height="545dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
+        android:divider="#35726C"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNotifi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="137dp"
+        android:layout_marginTop="263dp"
+        android:text="Let's buy more"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        android:textStyle="normal"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

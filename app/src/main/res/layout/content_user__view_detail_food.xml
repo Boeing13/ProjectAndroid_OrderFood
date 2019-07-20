@@ -6,14 +6,15 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#35726C"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".User_ViewDetailFood"
     tools:showIn="@layout/app_bar_user__view_detail_food">
 
     <ImageView
         android:id="@+id/imgFood"
-        android:layout_width="412dp"
-        android:layout_height="216dp"
+        android:layout_width="409dp"
+        android:layout_height="287dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +26,7 @@
         android:background="#A60E0D0D"
         android:gravity="center"
         android:text="AAAAAAAAAA"
-        android:textColor="#35726c"
+        android:textColor="#FFFFFF"
         android:textSize="23dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imgFood"
@@ -34,25 +35,24 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="406dp"
-        android:layout_height="148dp"
+        android:layout_width="412dp"
+        android:layout_height="146dp"
 
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="204dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/shadow"
         android:foregroundGravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgFood">
 
         <ImageButton
             android:id="@+id/btnBuy"
-            android:layout_width="64dp"
-            android:layout_height="44dp"
+            android:layout_width="62dp"
+            android:layout_height="43dp"
 
             android:layout_centerVertical="true"
 
-            android:layout_marginTop="88dp"
-            android:layout_marginEnd="36dp"
+            android:layout_marginTop="84dp"
+            android:layout_marginEnd="32dp"
             android:background="@drawable/button_rounded"
             android:src="@drawable/cart1"
             app:layout_constraintEnd_toStartOf="@+id/txtChooseNumber"
@@ -60,27 +60,27 @@
 
         <TextView
             android:id="@+id/txtFoodName"
-            android:layout_width="160dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="223dp"
+            android:layout_height="45dp"
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="AAAAA"
             android:textColor="#050002"
-            android:textSize="18dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtPrice"
-            android:layout_width="172dp"
-            android:layout_height="45dp"
+            android:layout_width="146dp"
+            android:layout_height="44dp"
             android:layout_marginTop="19dp"
             android:layout_marginEnd="20dp"
             android:gravity="center"
             android:text="$ 1000"
             android:textColor="#0C0B0B"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +88,7 @@
         <EditText
             android:id="@+id/txtChooseNumber"
             android:layout_width="172dp"
-            android:layout_height="43dp"
+            android:layout_height="48dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
@@ -101,14 +101,16 @@
 
     <TextView
         android:id="@+id/txtDescribe"
-        android:layout_width="398dp"
-        android:layout_height="136dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="411dp"
+        android:layout_height="127dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/shadow"
         android:gravity="center|start"
+        android:padding="20px"
         android:text=" In Android, when a button is clicked, how can text view be created in runtime using Java? What is the most efficient and advance way to send JSON object to an API and receive an array of arrays in Android? ... How do I send an array of text to a second activity and get that "
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 

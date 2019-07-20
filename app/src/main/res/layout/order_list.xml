@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30px">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="381dp"
+        android:layout_height="130dp"
+        android:background="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/txtFID"
+            android:layout_width="243dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="243dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtFID" />
+
+        <TextView
+            android:id="@+id/txtPhone"
+            android:layout_width="242dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtStatus" />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="245dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="16dp"
+            android:text="TextView"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPhone" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

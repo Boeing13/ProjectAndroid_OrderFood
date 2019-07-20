@@ -1,5 +1,7 @@
 package com.example.project_orderfood;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -41,17 +43,10 @@ public class Home extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Menu");
+        //toolbar.setTitle("Menu");
         categoryList = new ArrayList<>();
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -114,9 +109,7 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -126,6 +119,24 @@ public class Home extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
+        if (id == R.id.nav_cart) {
+            Intent intent=new Intent(this,User_OrderCart.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_orders) {
+            Intent intent=new Intent(this,User_OrderHistory.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_sign_out) {
+            SharedPreferences preferences = getSharedPreferences("Mypref", 0);
+            preferences.edit().remove("userID").commit();
+            preferences.edit().remove("orderDetails").commit();
+            Intent intent=new Intent(this,SigninActivity.class);
+            startActivity(intent);
+        }else if(id==R.id.nav_menu){
+//            Intent intent=new Intent(this,Home.class);
+//            startActivity(intent);
+//            this.finish();
+        }
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

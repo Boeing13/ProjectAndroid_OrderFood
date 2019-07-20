@@ -2,6 +2,7 @@ package com.example.project_orderfood;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.project_orderfood.Common.Common;
 import com.example.project_orderfood.UserAdapter.Adapter_U_ListFood;
 import com.example.project_orderfood.entity.Food;
 import com.example.project_orderfood.model.FoodDAO;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 public class User_ListFood extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ListView listView;
-    TextView txtSearch,txtError;
+    TextView txtSearch,txtError,txtFullName;
     int cateID;
      ArrayList<Food> allFoods=new ArrayList<>();
 
@@ -46,7 +48,7 @@ public class User_ListFood extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        listView = findViewById(R.id.listView_CateFood);
+        listView = findViewById(R.id.listView_Food);
         txtSearch=findViewById(R.id.txtSearch);
         txtError=findViewById(R.id.txtError);
        txtSearch.setOnKeyListener(new View.OnKeyListener() {
@@ -82,6 +84,11 @@ public class User_ListFood extends AppCompatActivity
       });
 
 
+        //Set name for user
+        View headerView = navigationView.getHeaderView(0);
+        txtFullName = headerView.findViewById(R.id.txtFullName);
+        txtFullName.setText(Common.currentUser.getUsername());
+
     }
 
 
@@ -114,7 +121,7 @@ public class User_ListFood extends AppCompatActivity
         if (id == R.id.btnSelect) {
             AlertDialog.Builder builder = new AlertDialog.Builder(User_ListFood.this);
             builder.setTitle("Search");
-            View customLayout = getLayoutInflater().inflate(R.layout.search, null);
+            View customLayout = getLayoutInflater().inflate(R.layout.address, null);
             builder.setView(customLayout);
             builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                 @Override
@@ -162,18 +169,25 @@ public class User_ListFood extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_cart) {
+            Intent intent=new Intent(this,User_OrderCart.class);
+            startActivity(intent);
+            this.finish();
+        } else if (id == R.id.nav_orders) {
+            Intent intent=new Intent(this,User_OrderHistory.class);
+            startActivity(intent);
+            this.finish();
+        } else if (id == R.id.nav_sign_out) {
+            SharedPreferences preferences = getSharedPreferences("Mypref", 0);
+            preferences.edit().remove("userID").commit();
+            preferences.edit().remove("orderDetails").commit();
+            Intent intent=new Intent(this,SigninActivity.class);
+            startActivity(intent);
+            this.finish();
+        }else if(id==R.id.nav_menu){
+            Intent intent=new Intent(this,Home.class);
+            startActivity(intent);
+            this.finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
