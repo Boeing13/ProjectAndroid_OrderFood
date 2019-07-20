@@ -64,6 +64,13 @@ public class User_OrderCart extends AppCompatActivity
         if(orderDetails.isEmpty()){
             listView.setVisibility(View.INVISIBLE);
             txtNotify.setVisibility(View.VISIBLE);
+            txtTotal.setText("Total: 0");
+            btnBuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(User_OrderCart.this,"Please choose some products first",Toast.LENGTH_LONG).show();
+                }
+            });
         }else{
             listView.setVisibility(View.VISIBLE);
             txtNotify.setVisibility(View.INVISIBLE);
@@ -216,16 +223,22 @@ public class User_OrderCart extends AppCompatActivity
 
     @Override
     public void sendInfor(String text) {
-        address = text;
         float totalTemp=getTotal(orderDetails);
-        int i = new OrderDAO().insertOrder(Common.currentUser, text, totalTemp);
-        if(i!=-1){
-            Toast.makeText(this,"Order successful. Thank you so much",Toast.LENGTH_LONG).show();
-           int oid= new OrderDAO().getNewestOrder();
-            int check = new OrderDAO().insertOrderDetail(oid, orderDetails);
-            orderDetails.clear();
-            listView.setVisibility(View.INVISIBLE);
-            txtNotify.setVisibility(View.VISIBLE);
+        if(text.isEmpty()){
+            Toast.makeText(this,"Please input address",Toast.LENGTH_LONG).show();
+        }else{
+            int i = new OrderDAO().insertOrder(Common.currentUser, text, totalTemp);
+            if(i!=-1){
+                Toast.makeText(this,"Order successful. Thank you so much",Toast.LENGTH_LONG).show();
+                int oid= new OrderDAO().getNewestOrder();
+                int check = new OrderDAO().insertOrderDetail(oid, orderDetails);
+                orderDetails.clear();
+                loadData(orderDetails);
+                txtTotal.setText("Total: 0" );
+                listView.setVisibility(View.INVISIBLE);
+                txtNotify.setVisibility(View.VISIBLE);
+            }
         }
+
     }
 }

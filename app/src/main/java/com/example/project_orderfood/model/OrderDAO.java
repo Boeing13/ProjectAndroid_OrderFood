@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderDAO {
-     String status="shipped";
     public int insertOrder(User user, String address,float total){
         String sql="INSERT INTO Orders\n" +
                 "VALUES (?,?,?,?,?);";
