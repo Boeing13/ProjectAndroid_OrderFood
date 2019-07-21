@@ -115,6 +115,9 @@ public class User_OrderHistory extends AppCompatActivity
 //            Intent intent=new Intent(this,User_OrderHistory.class);
 //            startActivity(intent);
 //            this.finish();
+        } else if(id == R.id.nav_information){
+            Intent intent = new Intent(getApplicationContext(), AboutUsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_sign_out) {
             SharedPreferences preferences = getSharedPreferences("Mypref", 0);
             preferences.edit().remove("userID").commit();

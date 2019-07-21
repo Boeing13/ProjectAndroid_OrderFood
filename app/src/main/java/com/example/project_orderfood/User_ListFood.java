@@ -31,7 +31,7 @@ public class User_ListFood extends AppCompatActivity
     ListView listView;
     TextView txtSearch,txtError,txtFullName;
     int cateID;
-     ArrayList<Food> allFoods=new ArrayList<>();
+    ArrayList<Food> allFoods=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,37 +51,37 @@ public class User_ListFood extends AppCompatActivity
         listView = findViewById(R.id.listView_Food);
         txtSearch=findViewById(R.id.txtSearch);
         txtError=findViewById(R.id.txtError);
-       txtSearch.setOnKeyListener(new View.OnKeyListener() {
-           @Override
-           public boolean onKey(View v, int keyCode, KeyEvent event) {
-               if(keyCode==KeyEvent.KEYCODE_ENTER){
-                   search();
-                   return true;
-               }
-               return false;
-           }
-       });
+        txtSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode==KeyEvent.KEYCODE_ENTER){
+                    search();
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
         FoodDAO foodDAO = new FoodDAO();
 
         //Example ưw
-       // cateID = 1;
+        // cateID = 1;
         cateID= getIntent().getIntExtra("cateID",0);
         allFoods = foodDAO.getAllFoodsByID(cateID);
         Adapter_U_ListFood adapter = new Adapter_U_ListFood(allFoods, this);
         listView.setAdapter(adapter);
 
-      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          @Override
-          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              int foodID = allFoods.get(position).foodID;
-              System.out.println("===============================");
-              Intent intent = new Intent(User_ListFood.this, User_ViewDetailFood.class);
-              intent.putExtra("foodID", foodID);
-              startActivity(intent);
-          }
-      });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int foodID = allFoods.get(position).foodID;
+                System.out.println("===============================");
+                Intent intent = new Intent(User_ListFood.this, User_ViewDetailFood.class);
+                intent.putExtra("foodID", foodID);
+                startActivity(intent);
+            }
+        });
 
 
         //Set name for user
@@ -146,7 +146,7 @@ public class User_ListFood extends AppCompatActivity
     public void search(){
         String tmp = txtSearch.getText().toString();
         FoodDAO dao = new FoodDAO();
-         allFoods = dao.Search(tmp, cateID);
+        allFoods = dao.Search(tmp, cateID);
         if (allFoods.size() == 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(User_ListFood.this);
             builder.setTitle("Message");
@@ -177,6 +177,9 @@ public class User_ListFood extends AppCompatActivity
             Intent intent=new Intent(this,User_OrderHistory.class);
             startActivity(intent);
             this.finish();
+        } else if(id == R.id.nav_information){
+            Intent intent = new Intent(getApplicationContext(), AboutUsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_sign_out) {
             SharedPreferences preferences = getSharedPreferences("Mypref", 0);
             preferences.edit().remove("userID").commit();

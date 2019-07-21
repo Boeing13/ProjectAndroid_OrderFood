@@ -31,9 +31,9 @@ import java.util.ArrayList;
 
 public class User_ViewDetailFood extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-   ImageView img;
-   TextView txtFoodTittle,txtFoodName,txtPrice,txtNumber,txtDes,txtFullName;
-   ImageButton btnImage;
+    ImageView img;
+    TextView txtFoodTittle,txtFoodName,txtPrice,txtNumber,txtDes,txtFullName;
+    ImageButton btnImage;
     int foodID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class User_ViewDetailFood extends AppCompatActivity
         txtDes=findViewById(R.id.txtDescribe);
         btnImage=findViewById(R.id.btnBuy);
 
-         foodID= getIntent().getIntExtra("foodID",-1);
+        foodID= getIntent().getIntExtra("foodID",-1);
         final Food food = new FoodDAO().getFood(foodID);
         String url=food.img;
         Picasso.with(this).load(url).into(img);
@@ -69,20 +69,20 @@ public class User_ViewDetailFood extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 ArrayList<OrderDetail> odList = getData();
-               String textNumber= txtNumber.getText().toString();
-               if(textNumber.equals("")){
-                   Toast.makeText(User_ViewDetailFood.this,"Please select number of foods > 0",Toast.LENGTH_LONG).show();
-               }else{
-                   int number=Integer.parseInt(textNumber);
-                   int check=checkExitedAndReturnPosition(odList,foodID);
-                   if(check==-1){
-                       odList.add(new OrderDetail(foodID,number,food.price));
-                   }else {
-                       odList.get(check).quantity+=number;
-                   }
-                   loadData(odList);
-                   Toast.makeText(User_ViewDetailFood.this,"Done !",Toast.LENGTH_LONG).show();
-               }
+                String textNumber= txtNumber.getText().toString();
+                if(textNumber.equals("")){
+                    Toast.makeText(User_ViewDetailFood.this,"Please select number of foods > 0",Toast.LENGTH_LONG).show();
+                }else{
+                    int number=Integer.parseInt(textNumber);
+                    int check=checkExitedAndReturnPosition(odList,foodID);
+                    if(check==-1){
+                        odList.add(new OrderDetail(foodID,number,food.price));
+                    }else {
+                        odList.get(check).quantity+=number;
+                    }
+                    loadData(odList);
+                    Toast.makeText(User_ViewDetailFood.this,"Done !",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -143,7 +143,7 @@ public class User_ViewDetailFood extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-       
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -162,6 +162,9 @@ public class User_ViewDetailFood extends AppCompatActivity
             Intent intent=new Intent(this,User_OrderHistory.class);
             startActivity(intent);
             this.finish();
+        } else if(id == R.id.nav_information){
+            Intent intent = new Intent(getApplicationContext(), AboutUsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_sign_out) {
             SharedPreferences preferences = getSharedPreferences("Mypref", 0);
             preferences.edit().remove("userID").commit();

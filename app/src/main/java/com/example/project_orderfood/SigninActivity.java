@@ -2,7 +2,6 @@ package com.example.project_orderfood;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,21 +15,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.project_orderfood.Common.Common;
-import com.example.project_orderfood.entity.Food;
-import com.example.project_orderfood.entity.OrderDetail;
 import com.example.project_orderfood.entity.User;
 import com.example.project_orderfood.model.UserDAO;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class SigninActivity extends AppCompatActivity {
+
     private EditText etPhone, etPassword;
     private UserDAO dao;
-    ArrayList<OrderDetail> orderDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +33,14 @@ public class SigninActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         dao = new UserDAO();
 
+        Intent intent = getIntent();
+        String phone = intent.getStringExtra("phone");
+        String password = intent.getStringExtra("password");
+        etPhone.setText(phone);
+        etPassword.setText(password);
+
     }
 
-    //VALIDATE AND SIGNIN
     public void signIn(View view) throws SQLException {
         final ProgressDialog mDialog = new ProgressDialog(SigninActivity.this);
         mDialog.setMessage("Please waiting");
@@ -55,61 +53,60 @@ public class SigninActivity extends AppCompatActivity {
                 mDialog.dismiss();
                 String phone = etPhone.getText().toString();
                 String password = etPassword.getText().toString();
-                if(phone.isEmpty()){
-                    Toast.makeText(getApplicationContext(), getString(R.string.err_msg_empty), Toast.LENGTH_LONG).show();
-                    requestFocus(etPhone);
-                } else if(!dao.isExistedPhone(phone)){
-                    Toast.makeText(getApplicationContext(), getString(R.string.err_msg_not_exist), Toast.LENGTH_LONG).show();
-                    requestFocus(etPhone);
-                } else if(password.isEmpty()){
-                    Toast.makeText(getApplicationContext(), getString(R.string.err_msg_empty), Toast.LENGTH_LONG).show();
-                    requestFocus(etPassword);
+                if(!validatePhone(phone)){
+                    return;
                 } else {
                     User user = dao.getUser(phone);
-                    if(!password.equals(user.getPassword())){
-                        Toast.makeText(getApplicationContext(), getString(R.string.err_msg_wrong_password), Toast.LENGTH_LONG).show();
-                        requestFocus(etPassword);
+                    if(!validatePassword(password, user)){
+                        return;
                     } else {
-                        orderDetails=new ArrayList<>();
-                        Toast.makeText(getApplicationContext(), getString(R.string.noti_signin), Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getApplicationContext(), Home.class);
-                        Common.currentUser = user;
-                        SharedPreferences.Editor editor=getApplicationContext().getSharedPreferences("MyPre",MODE_PRIVATE).edit();
-                        editor.putInt("userID",user.getUserId());
-                        Gson gson=new Gson();
-                        String json = gson.toJson(orderDetails);
-                        editor.putString("orderDetails",json);
-                        editor.apply();
-                        startActivity(intent);
-
+                        signInSuccess(user);
                     }
-
                 }
             }
         }.start();
     }
 
-    public void loadData(){
-        SharedPreferences.Editor editor=getApplicationContext().getSharedPreferences("MyPre",MODE_PRIVATE).edit();
-        Gson gson=new Gson();
-        String json = gson.toJson(orderDetails);
-        editor.putString("orderDetails",json);
-        editor.apply();
-    }
-
-    public void getData(){
-        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("MyPre",MODE_PRIVATE);
-        Gson gson=new Gson();
-       String json= sharedPreferences.getString("orderDetails",null);
-        Type type =new TypeToken<ArrayList<OrderDetail>>(){}.getType();
-        ArrayList<OrderDetail> orderDetails=gson.fromJson(json,type);
-    }
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-
         }
     }
 
+    private boolean validatePhone(String phone) {
+        if (phone.isEmpty()) {
+            Toast.makeText(getApplicationContext(), getString(R.string.err_msg_empty), Toast.LENGTH_LONG).show();
+            requestFocus(etPhone);
+            return false;
+        } else if (!dao.isExistedPhone(phone)) {
+            Toast.makeText(getApplicationContext(), getString(R.string.err_msg_not_exist), Toast.LENGTH_LONG).show();
+            requestFocus(etPhone);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validatePassword(String password, User user) {
+        if (password.isEmpty()) {
+            Toast.makeText(getApplicationContext(), getString(R.string.err_msg_empty), Toast.LENGTH_LONG).show();
+            requestFocus(etPassword);
+            return false;
+        } else {
+            if (!password.equals(user.getPassword())) {
+                Toast.makeText(getApplicationContext(), getString(R.string.err_msg_wrong_password), Toast.LENGTH_LONG).show();
+                requestFocus(etPassword);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void signInSuccess(User user){
+        Toast.makeText(getApplicationContext(), getString(R.string.noti_signin), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), Home.class);
+        Common.currentUser = user;
+        startActivity(intent);
+        finish();
+    }
 
 }

@@ -53,8 +53,8 @@ public class ViewDetailOrder extends AppCompatActivity
         Adapter_OrderCart adapter_orderCart=new Adapter_OrderCart(orderDetai,this);
         listView.setAdapter(adapter_orderCart);
 
-       float total= getTotal(orderDetai);
-       txtTotal.setText("Total :" + Float.toString(total));
+        float total= getTotal(orderDetai);
+        txtTotal.setText("Total :" + Float.toString(total));
     }
 
     public float getTotal(ArrayList<OrderDetail> orderDetails) {
@@ -109,6 +109,9 @@ public class ViewDetailOrder extends AppCompatActivity
             Intent intent=new Intent(this,User_OrderHistory.class);
             startActivity(intent);
             this.finish();
+        } else if(id == R.id.nav_information){
+            Intent intent = new Intent(getApplicationContext(), AboutUsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_sign_out) {
             SharedPreferences preferences = getSharedPreferences("Mypref", 0);
             preferences.edit().remove("userID").commit();

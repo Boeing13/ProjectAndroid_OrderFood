@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.project_orderfood.Common.Common;
 import com.example.project_orderfood.UserAdapter.MyCategoryAdapter;
+import com.example.project_orderfood.UserAdapter.ViewPagerAdapter;
 import com.example.project_orderfood.entity.Category;
 import com.example.project_orderfood.model.CategoryDAO;
 
@@ -37,6 +39,11 @@ public class Home extends AppCompatActivity
     private List<Category> categoryList;
     private CategoryDAO dao;
     private RecyclerView.Adapter adapter;
+
+    //slider
+    private String[] imageList;
+    private ViewPager viewPager;
+    private ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,28 @@ public class Home extends AppCompatActivity
 
         loadMenu();
        // recycler_menu.setOnc
+
+        //Setup slider
+        imageList = new String[10];
+        setupSlider();
+        viewPager = findViewById(R.id.menuViewPager);
+        viewPagerAdapter = new ViewPagerAdapter(this, imageList);
+        viewPager.setAdapter(viewPagerAdapter);
+
+    }
+
+    private void setupSlider() {
+        imageList = new String[]{
+                "https://image.freepik.com/free-vector/big-sale-template-banner-vector-background_1375-1003.jpg",
+                "http://d2.fajridemo.com/eurogulf/wp-content/uploads/2017/06/pizza-hut-promo.jpg",
+                "https://recipes-secure-graphics.grocerywebsite.com/0_GraphicsRecipes/4589_4k.jpg",
+                "https://i.ndtvimg.com/i/2016-06/chinese-625_625x350_81466064119.jpg",
+                "https://i.hungrygowhere.com/business/1c/7a/12/00/66f50295-0b7b-4d46-bf95-0aa4a32c21dbimg-1999_800x0_crop_800x800_8fe89a587c.jpg",
+                "https://downshiftology.com/wp-content/uploads/2019/04/Cobb-Salad-3.jpg",
+                "https://coconutsandkettlebells.com/wp-content/uploads/homemade-ice-cream-cake.jpg",
+                "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_3456,w_5184,x_0,y_0/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/superdeluxe_owgtql.jpg"
+
+        };
     }
 
     private void loadMenu() {
@@ -123,6 +152,9 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_cart) {
             Intent intent=new Intent(this,User_OrderCart.class);
             startActivity(intent);
+        } else if(id == R.id.nav_information){
+            Intent intent = new Intent(getApplicationContext(), AboutUsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_orders) {
             Intent intent=new Intent(this,User_OrderHistory.class);
             startActivity(intent);
@@ -133,9 +165,7 @@ public class Home extends AppCompatActivity
             Intent intent=new Intent(this,SigninActivity.class);
             startActivity(intent);
         }else if(id==R.id.nav_menu){
-//            Intent intent=new Intent(this,Home.class);
-//            startActivity(intent);
-//            this.finish();
+
         }
 
 
