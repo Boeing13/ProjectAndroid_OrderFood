@@ -8,10 +8,27 @@
     tools:context=".Home"
     tools:showIn="@layout/app_bar_home">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingConstraints">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/menuViewPager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_menu"
+        android:layout_marginTop="210dp"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"></android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>
